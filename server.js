@@ -6,6 +6,7 @@ const express = require('express');
 
 const router_v1 = require('./routes/v1/index');
 const router_v2 = require('./routes/v2/index');
+const router_cm = require('./routes/cm/index');
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use('/api/v1/', router_v1);
 app.use('/api/v2/', router_v2);
+app.use('/api/cm/', router_cm);
 
 const port = process.env.SERVER_PORT || 8080;
 
