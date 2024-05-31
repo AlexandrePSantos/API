@@ -3,7 +3,7 @@ const controller = require('../../controllers/cm/user');
 const authMiddleware = require('../../middlewares/auth');
 
 //use auth middleware
-userRouter.use(authMiddleware);
+// userRouter.use(authMiddleware);
 
 //user CRUD
 userRouter.get('/', controller.getAll); //read all
