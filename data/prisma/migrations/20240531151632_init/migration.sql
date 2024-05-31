@@ -126,7 +126,7 @@ CREATE TABLE "Task" (
     "observations" TEXT,
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("idTask")
-);
+);   
 
 -- CreateTable
 CREATE TABLE "Permission" (
