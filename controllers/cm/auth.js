@@ -6,13 +6,13 @@ const prisma = new PrismaClient()
 
 exports.signin = async (req, res) => {
     try {
-        const { userrname, password } = req.body;
+        const { username, password } = req.body;
 
         console.log(`Attempting to sign in with email: ${email}`);
 
         const user = await prisma.user.findUnique({
             where: {
-                userrname: userrname,
+                username: username,
             },
         })
 
