@@ -26,7 +26,7 @@ model User {
   photo       String?      @db.Text
   password    String       @db.VarChar(255)
   idType      Int
-  username    String?      @db.VarChar(50)
+  username    String?      @unique @db.VarChar(50)
   name        String?      @db.VarChar(100)
   last_login  DateTime?
   UserType    UserType     @relation(fields: [idType], references: [idType])

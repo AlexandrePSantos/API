@@ -1,5 +1,9 @@
 const projectRouter = require('express').Router();
 const controller = require('../../controllers/cm/project');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+projectRouter.use(authMiddleware);
 
 //project CRUD
 projectRouter.get('/', controller.getAll); //read all

@@ -1,5 +1,9 @@
 const localBackupRouter = require('express').Router();
 const controller = require('../../controllers/cm/localBackup');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+localBackupRouter.use(authMiddleware);
 
 //localBackup CRUD
 localBackupRouter.get('/', controller.getAll); //read all

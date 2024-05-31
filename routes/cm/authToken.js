@@ -1,5 +1,9 @@
 const authTokenRouter = require('express').Router();
 const controller = require('../../controllers/cm/authToken');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+authTokenRouter.use(authMiddleware);
 
 //authToken CRUD
 authTokenRouter.get('/', controller.getAll); //read all

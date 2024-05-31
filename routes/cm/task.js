@@ -1,5 +1,9 @@
 const taskRouter = require('express').Router();
 const controller = require('../../controllers/cm/task');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+taskRouter.use(authMiddleware);
 
 //task CRUD
 taskRouter.get('/', controller.getAll); //read all

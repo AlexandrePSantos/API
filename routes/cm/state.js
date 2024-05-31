@@ -1,5 +1,9 @@
 const stateRouter = require('express').Router();
 const controller = require('../../controllers/cm/state');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+stateRouter.use(authMiddleware);
 
 //state CRUD
 stateRouter.get('/', controller.getAll); //read all

@@ -1,5 +1,9 @@
 const permissionRouter = require('express').Router();
 const controller = require('../../controllers/cm/permission');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+permissionRouter.use(authMiddleware);
 
 //permission CRUD
 permissionRouter.get('/', controller.getAll); //read all

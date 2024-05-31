@@ -1,5 +1,9 @@
 const syncLogRouter = require('express').Router();
 const controller = require('../../controllers/cm/syncLog');
+const authMiddleware = require('../../middlewares/auth');
+
+//use auth middleware
+syncLogRouter.use(authMiddleware);
 
 //syncLog CRUD
 syncLogRouter.get('/', controller.getAll); //read all

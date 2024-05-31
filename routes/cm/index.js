@@ -8,7 +8,9 @@ const syncLogRouter = require('./syncLog');
 const taskRouter = require('./task');   
 const userRouter = require('./user');
 const userTypeRouter = require('./userType');
+const authRouter = require('./auth');
 
+router.use('/auth', authRouter);
 router.use('/authToken', authTokenRouter);
 router.use('/localBackup', localBackupRouter);
 router.use('/permission', permissionRouter);
@@ -18,5 +20,6 @@ router.use('/syncLog', syncLogRouter);
 router.use('/task', taskRouter);
 router.use('/user', userRouter);
 router.use('/userType', userTypeRouter);
+
 
 module.exports = router;

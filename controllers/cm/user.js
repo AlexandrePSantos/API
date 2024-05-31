@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
+const bcrypt = require('bcryptjs');
 
 // Return all users
 exports.getAll = async (req, res) => {
@@ -29,12 +30,13 @@ exports.getById = async (req, res) => {
 // Create user
 exports.create = async (req, res) => {
     const { email, photo, password, idType, username, name, last_login } = req.body;
+    var hashedPassword = bcrypt.hashSync(password, 8);
     try {
         const user = await prisma.user.create({
             data: {
                 email: email,
                 photo: photo,
-                password: password,
+                password: hashedPassword,
                 idType: idType,
                 username: username,
                 name: name,
@@ -46,11 +48,10 @@ exports.create = async (req, res) => {
         res.status(400).json({ msg: error.message })
     }
 }
-
 // Update user
 exports.update = async (req, res) => {
     const { idUser, email, photo, password, idType, username, name, last_login } = req.body;
-
+    var hashedPassword = bcrypt.hashSync(password, 8);
     try {
         const user = await prisma.user.update({
             where: {
@@ -59,7 +60,7 @@ exports.update = async (req, res) => {
             data: {
                 email: email,
                 photo: photo,
-                password: password,
+                password: hashedPassword,
                 idType: idType,
                 username: username,
                 name: name,
