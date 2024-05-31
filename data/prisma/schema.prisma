@@ -1,3 +1,9 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,18 +13,103 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Students {
-  id    Int     @id @default(autoincrement())
-  number String  @unique
-  name  String
-  city String
-  birthday String
+model UserType {
+  idType      Int          @id @default(autoincrement())
+  type        String       @db.VarChar(50)
+  User        User[]
+  Permission  Permission[]
 }
 
-model Users{
-  id String  @id @default(uuid())
-  name String  @db.VarChar(255)
-  email String @unique
-  password String
-  isAdmin   Boolean @default(false)
+model User {
+  idUser      Int          @id @default(autoincrement())
+  email       String       @unique @db.VarChar(100)
+  photo       String?      @db.Text
+  password    String       @db.VarChar(255)
+  idType      Int
+  username    String?      @db.VarChar(50)
+  name        String?      @db.VarChar(100)
+  last_login  DateTime?
+  UserType    UserType     @relation(fields: [idType], references: [idType])
+  Project     Project[]
+  SyncLog     SyncLog[]
+  LocalBackup LocalBackup[]
+  AuthToken   AuthToken[]
+}
+
+model State {
+  idState  Int      @id @default(autoincrement())
+  state    String   @db.VarChar(50)
+  Project  Project[]
+  Task     Task[]
+}
+
+model Project {
+  idProject          Int      @id @default(autoincrement())
+  nameProject        String   @db.VarChar(100)
+  startDateP         DateTime?
+  endDateP           DateTime?
+  idState            Int
+  idUser             Int
+  completionStatus   Boolean  @default(false)
+  performanceReview  String?  @db.Text
+  obs                String?  @db.Text
+  State              State    @relation(fields: [idState], references: [idState])
+  User               User     @relation(fields: [idUser], references: [idUser])
+  Task               Task[]
+}
+
+model Task {
+  idTask          Int      @id @default(autoincrement())
+  nameTask        String   @db.VarChar(100)
+  startDateT      DateTime?
+  endDateT        DateTime?
+  idProject       Int
+  idState         Int
+  photo           String?  @db.Text
+  timeSpend       DateTime?
+  local           String?  @db.VarChar(100)
+  taxes           Decimal?   @db.Decimal(10, 2)
+  completionRate  Decimal?   @db.Decimal(5, 2)
+  photos          String?  @db.Text
+  observations    String?  @db.Text
+  Project         Project  @relation(fields: [idProject], references: [idProject])
+  State           State    @relation(fields: [idState], references: [idState])
+}
+
+model Permission {
+  idPermission       Int      @id @default(autoincrement())
+  role               String   @db.VarChar(50)
+  can_create_project Boolean?
+  can_edit_project   Boolean?
+  can_delete_project Boolean?
+  can_manage_users   Boolean?
+  can_assign_tasks   Boolean?
+  can_export_stats   Boolean?
+  idType             Int
+  UserType           UserType @relation(fields: [idType], references: [idType])
+}
+
+model SyncLog {
+  idLog     Int      @id @default(autoincrement())
+  idUser    Int
+  timestamp DateTime
+  action    String   @db.VarChar(100)
+  status    String   @db.VarChar(50)
+  User      User     @relation(fields: [idUser], references: [idUser])
+}
+
+model LocalBackup {
+  idBackup  Int      @id @default(autoincrement())
+  data      Bytes
+  timestamp DateTime
+  idUser    Int
+  User      User     @relation(fields: [idUser], references: [idUser])
+}
+
+model AuthToken {
+  idToken Int      @id @default(autoincrement())
+  idUser  Int
+  token   String   @db.VarChar(255)
+  expires DateTime
+  User    User     @relation(fields: [idUser], references: [idUser])
 }

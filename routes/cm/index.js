@@ -1,6 +1,13 @@
 const router = require('express').Router();
-const authRouter = require('./auth');
-const studentRouter = require('./students');
+const authTokenRouter = require('./authToken');
+const localBackupRouter = require('./localBackup'); 
+const permissionRouter = require('./permission');
+const projectRouter = require('./project');
+const stateRouter = require('./state');
+const syncLogRouter = require('./syncLog');
+const taskRouter = require('./task');   
+const userRouter = require('./user');
+const userTypeRouter = require('./userType');
 
 router.use('/authToken', authTokenRouter);
 router.use('/localBackup', localBackupRouter);
