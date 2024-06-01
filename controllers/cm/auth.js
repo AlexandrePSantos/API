@@ -48,7 +48,7 @@ exports.signup = async (req, res) => {
     try {
         const { name, email, password, username } = req.body;
 
-        await prisma.users.create({
+        await prisma.user.create({
             data: {
                 email: email,
                 username: username,
