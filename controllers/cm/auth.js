@@ -54,6 +54,7 @@ exports.signup = async (req, res) => {
                 username: username,
                 name: name,
                 password: bcrypt.hashSync(password, 8),
+                idType: 3
             },
         })
 
