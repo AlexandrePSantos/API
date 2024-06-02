@@ -59,6 +59,7 @@ exports.update = async (req, res) => {
                 idUser: Number(id),
             },
             data: {
+                idUser: id,
                 email: email,
                 photo: photo,
                 password: hashedPassword,
