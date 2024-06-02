@@ -45,12 +45,13 @@ exports.create = async (req, res) => {
 
 // Update auth token
 exports.update = async (req, res) => {
-    const { idToken, idUser, token, expires } = req.body;
+    const id = req.params.idToken;
+    const { idUser, token, expires } = req.body;
 
     try {
         const authToken = await prisma.authToken.update({
             where: {
-                idToken: Number(idToken),
+                idToken: Number(id),
             },
             data: {
                 idUser: idUser,

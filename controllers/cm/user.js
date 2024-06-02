@@ -52,7 +52,9 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     const id = req.params.idUser;
     const { email, photo, password, idType, username, name, last_login } = req.body;
+
     var hashedPassword = bcrypt.hashSync(password, 8);
+    
     try {
         const user = await prisma.user.update({
             where: {

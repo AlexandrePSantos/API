@@ -7,9 +7,9 @@ syncLogRouter.use(authMiddleware);
 
 //syncLog CRUD
 syncLogRouter.get('/', controller.getAll); //read all
-syncLogRouter.get('/:idToken', controller.getById); //read one by his id
+syncLogRouter.get('/:idLog', controller.getById); //read one by his id
 syncLogRouter.post('/create', controller.create); //create new syncLog
-syncLogRouter.put('/update', controller.update); //update syncLog
-syncLogRouter.delete('/delete/:idToken', controller.delete); //delete syncLog
+syncLogRouter.put('/update/:idLog', controller.update); //update syncLog
+syncLogRouter.delete('/delete/:idLog', controller.delete); //delete syncLog
 
 module.exports = syncLogRouter;

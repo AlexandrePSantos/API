@@ -45,12 +45,13 @@ exports.create = async (req, res) => {
 
 // Update local backup
 exports.update = async (req, res) => {
-    const { idBackup, data, timestamp, idUser } = req.body;
+    const id = req.params.idBackup;
+    const { data, timestamp, idUser } = req.body;
 
     try {
         const localBackup = await prisma.localBackup.update({
             where: {
-                idBackup: Number(idBackup),
+                idBackup: Number(id),
             },
             data: {
                 data: data,

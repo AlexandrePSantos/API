@@ -50,12 +50,13 @@ exports.create = async (req, res) => {
 
 // Update project
 exports.update = async (req, res) => {
-    const { idProject, nameProject, startDateP, endDateP, idState, idUser, completionStatus, performanceReview, obs } = req.body;
+    const id = req.params.idProject;
+    const { nameProject, startDateP, endDateP, idState, idUser, completionStatus, performanceReview, obs } = req.body;
 
     try {
         const project = await prisma.project.update({
             where: {
-                idProject: Number(idProject),
+                idProject: Number(id),
             },
             data: {
                 nameProject: nameProject,

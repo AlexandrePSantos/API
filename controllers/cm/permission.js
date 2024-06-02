@@ -50,12 +50,13 @@ exports.create = async (req, res) => {
 
 // Update permission
 exports.update = async (req, res) => {
-    const { idPermission, role, can_create_project, can_edit_project, can_delete_project, can_manage_users, can_assign_tasks, can_export_stats, idType } = req.body;
+    const id = req.params.idPermission;
+    const { role, can_create_project, can_edit_project, can_delete_project, can_manage_users, can_assign_tasks, can_export_stats, idType } = req.body;
 
     try {
         const permission = await prisma.permission.update({
             where: {
-                idPermission: Number(idPermission),
+                idPermission: Number(id),
             },
             data: {
                 role: role,

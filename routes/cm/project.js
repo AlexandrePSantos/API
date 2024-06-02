@@ -7,9 +7,9 @@ projectRouter.use(authMiddleware);
 
 //project CRUD
 projectRouter.get('/', controller.getAll); //read all
-projectRouter.get('/:idToken', controller.getById); //read one by his id
+projectRouter.get('/:idProject', controller.getById); //read one by his id
 projectRouter.post('/create', controller.create); //create new project
-projectRouter.put('/update', controller.update); //update project
-projectRouter.delete('/delete/:idToken', controller.delete); //delete project
+projectRouter.put('/update/:idProject', controller.update); //update project
+projectRouter.delete('/delete/:idProject', controller.delete); //delete project
 
 module.exports = projectRouter;

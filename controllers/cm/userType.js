@@ -43,12 +43,13 @@ exports.create = async (req, res) => {
 
 // Update user type
 exports.update = async (req, res) => {
-    const { idType, type } = req.body;
+    const id = req.params.idType;
+    const { type } = req.body;
 
     try {
         const userType = await prisma.userType.update({
             where: {
-                idType: Number(idType),
+                idType: Number(id),
             },
             data: {
                 type: type

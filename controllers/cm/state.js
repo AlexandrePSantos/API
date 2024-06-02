@@ -43,12 +43,13 @@ exports.create = async (req, res) => {
 
 // Update state
 exports.update = async (req, res) => {
-    const { idState, state } = req.body;
+    const id = req.params.idState;
+    const { state } = req.body;
 
     try {
         const updatedState = await prisma.state.update({
             where: {
-                idState: Number(idState),
+                idState: Number(id),
             },
             data: {
                 state: state

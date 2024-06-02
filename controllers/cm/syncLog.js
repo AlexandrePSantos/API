@@ -46,12 +46,13 @@ exports.create = async (req, res) => {
 
 // Update sync log
 exports.update = async (req, res) => {
-    const { idLog, idUser, timestamp, action, status } = req.body;
+    const id = req.params.idLog;
+    const { idUser, timestamp, action, status } = req.body;
 
     try {
         const syncLog = await prisma.syncLog.update({
             where: {
-                idLog: Number(idLog),
+                idLog: Number(id),
             },
             data: {
                 idUser: idUser,
