@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
 }
 // Update user
 exports.update = async (req, res) => {
-    const id = req.params.id;
+    const id = req.params.idUser;
     const { email, photo, password, idType, username, name, last_login } = req.body;
     var hashedPassword = bcrypt.hashSync(password, 8);
     try {
