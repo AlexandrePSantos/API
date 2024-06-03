@@ -1,5 +1,5 @@
 const statsRouter = require('express').Router();
-const controller = require('../../controllers/cm/state');
+const controller = require('../../controllers/cm/stats');
 const authMiddleware = require('../../middlewares/auth');
 
 //use auth middleware
