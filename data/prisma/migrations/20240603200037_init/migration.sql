@@ -66,8 +66,3 @@ CREATE TABLE SyncLog (
     status VARCHAR(50),
     FOREIGN KEY (idUser) REFERENCES "User"(idUser)
 );
-
--- Criação de índices para melhorar o desempenho
-CREATE INDEX idx_user_email ON "User"(email);
-CREATE INDEX idx_project_user ON Project(idUser);
-CREATE INDEX idx_task_project ON Task(idProject);
