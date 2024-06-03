@@ -5,6 +5,8 @@ const authMiddleware = require('../../middlewares/auth');
 //use auth middleware
 statsRouter.use(authMiddleware);
 
-statsRouter.get('/user/:idUser', controller.usersStats);
-statsRouter.get('/project/:idProject', controller.projectsStats);
-statsRouter.get('/task/:idTask', controller.tasksStats);
+statsRouter.get('/user/:idUser', controller.userStats);
+statsRouter.get('/project/:idProject', controller.projectStats);
+statsRouter.get('/task/:idTask', controller.taskStats);
+
+module.exports = statsRouter;
