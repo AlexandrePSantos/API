@@ -5,7 +5,7 @@ CREATE TABLE UserType (
 );
 
 -- Criação da tabela User
-CREATE TABLE "User" (
+CREATE TABLE Users (
     idUser SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     photo TEXT,
@@ -35,7 +35,7 @@ CREATE TABLE Project (
     performanceReview TEXT,
     obs TEXT,
     FOREIGN KEY (idState) REFERENCES State(idState),
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
+    FOREIGN KEY (idUser) REFERENCES Users(idUser)
 );
 
 -- Criação da tabela Task
@@ -64,5 +64,5 @@ CREATE TABLE SyncLog (
     "timestamp" TIMESTAMP,
     action VARCHAR(100),
     status VARCHAR(50),
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
+    FOREIGN KEY (idUser) REFERENCES Users(idUser)
 );
