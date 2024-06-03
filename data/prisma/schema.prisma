@@ -63,10 +63,10 @@ model Task {
   idProject       Int
   idState         Int
   photo           String?  @db.Text
-  timeSpent       Int?
+  timeSpend       Int?
   local           String?  @db.VarChar(100)
-  taxes           Decimal?   @db.Decimal(10, 2)
-  completionRate  Decimal?   @db.Decimal(5, 2)
+  taxes           Decimal? @db.Decimal(10, 2)
+  completionRate  Decimal? @db.Decimal(5, 2)
   photos          String?  @db.Text
   observations    String?  @db.Text
   Project         Project  @relation(fields: [idProject], references: [idProject])
