@@ -7,17 +7,17 @@ projectRouter.use(authMiddleware);
 
 //project CRUD
 projectRouter.get('/', controller.getAll); //read all
-projectRouter.get('/:idProject', controller.getById); //read one by his id
+projectRouter.get('/:idproject', controller.getById); //read one by his id
 projectRouter.post('/create', controller.create); //create new project
-projectRouter.put('/update/:idProject', controller.update); //update project
-projectRouter.delete('/delete/:idProject', controller.delete); //delete project
+projectRouter.put('/update/:idproject', controller.update); //update project
+projectRouter.delete('/delete/:idproject', controller.delete); //delete project
 
 // Novas rotas para o projeto
-projectRouter.get('/:idProject/tasks', controller.getTasks);
-projectRouter.get('/:idProject/users', controller.getUsers);
-projectRouter.post('/:idProject/assignUser/:idUser', controller.assignUser);
-projectRouter.delete('/:idProject/removeUser/:idUser', controller.removeUser);
-projectRouter.put('/:idProject/complete', controller.completeProject);
-projectRouter.put('/:idProject/performanceReview', controller.setPerformanceReview);
+projectRouter.get('/:idproject/tasks', controller.getTasks);
+projectRouter.get('/:idproject/users', controller.getUsers);
+projectRouter.post('/:idproject/assignUser/:iduser', controller.assignUser);
+projectRouter.delete('/:idproject/removeUser/:iduser', controller.removeUser);
+projectRouter.put('/:idproject/complete', controller.completeProject);
+projectRouter.put('/:idproject/performanceReview', controller.setPerformanceReview);
 
 module.exports = projectRouter;

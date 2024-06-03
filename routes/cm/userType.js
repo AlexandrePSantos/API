@@ -7,9 +7,9 @@ const authMiddleware = require('../../middlewares/auth');
 
 //userType CRUD
 userTypeRouter.get('/', controller.getAll); //read all
-userTypeRouter.get('/:idType', controller.getById); //read one by his id
+userTypeRouter.get('/:idtype', controller.getById); //read one by his id
 userTypeRouter.post('/create', controller.create); //create new userType
-userTypeRouter.put('/update/:idType', controller.update); //update userType
-userTypeRouter.delete('/delete/:idType', controller.delete); //delete userType
+userTypeRouter.put('/update/:idtype', controller.update); //update userType
+userTypeRouter.delete('/delete/:idtype', controller.delete); //delete userType
 
 module.exports = userTypeRouter;
