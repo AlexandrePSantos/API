@@ -13,71 +13,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UserType {
-  idType      Int          @id @default(autoincrement())
+model usertype {
+  idtype      Int          @id @default(autoincrement())
   type        String       @db.VarChar(50)
-  User        user[]
+  user        user[]
 }
 
 model user {
-  idUser      Int          @id @default(autoincrement())
+  iduser      Int          @id @default(autoincrement())
   email       String       @unique @db.VarChar(100)
   photo       String?      @db.Text
   password    String       @db.VarChar(255)
-  idType      Int
+  idtype      Int
   username    String?      @unique @db.VarChar(50)
   name        String?      @db.VarChar(100)
   last_login  DateTime?
-  UserType    UserType     @relation(fields: [idType], references: [idType])
-  Project     Project[]
-  SyncLog     SyncLog[]
+  usertype    usertype     @relation(fields: [idtype], references: [idtype])
+  project     project[]
+  SyncLog     synclog[]
 }
 
-model State {
-  idState  Int      @id @default(autoincrement())
+model state {
+  idstate  Int      @id @default(autoincrement())
   state    String   @db.VarChar(50)
-  Project  Project[]
-  Task     Task[]
+  project  project[]
+  task     task[]
 }
 
-model Project {
-  idProject          Int      @id @default(autoincrement())
-  nameProject        String   @db.VarChar(100)
-  startDateP         DateTime?
-  endDateP           DateTime?
-  idState            Int
-  idUser             Int
-  completionStatus   Boolean  @default(false)
-  performanceReview  String?  @db.Text
+model project {
+  idproject          Int      @id @default(autoincrement())
+  nameproject        String   @db.VarChar(100)
+  startdatep         DateTime?
+  enddatep           DateTime?
+  idstate            Int
+  iduser             Int
+  completionstatus   Boolean  @default(false)
+  performancereview  String?  @db.Text
   obs                String?  @db.Text
-  State              State    @relation(fields: [idState], references: [idState])
-  User               user     @relation(fields: [idUser], references: [idUser])
-  Task               Task[]
+  state              state    @relation(fields: [idstate], references: [idstate])
+  user               user     @relation(fields: [iduser], references: [iduser])
+  task               task[]
 }
 
-model Task {
-  idTask          Int      @id @default(autoincrement())
-  nameTask        String   @db.VarChar(100)
-  startDateT      DateTime?
-  endDateT        DateTime?
-  idProject       Int
-  idState         Int
+model task {
+  idtask          Int      @id @default(autoincrement())
+  nametask        String   @db.VarChar(100)
+  startdatet      DateTime?
+  enddatet        DateTime?
+  idproject       Int
+  idstate         Int
   photo           String?  @db.Text
-  timeSpend       Int?
+  timespend       Int?
   local           String?  @db.VarChar(100)
   taxes           Decimal? @db.Decimal(10, 2)
-  completionRate  Decimal? @db.Decimal(5, 2)
+  completionrate  Decimal? @db.Decimal(5, 2)
   photos          String?  @db.Text
   observations    String?  @db.Text
-  Project         Project  @relation(fields: [idProject], references: [idProject])
-  State           State    @relation(fields: [idState], references: [idState])
+  project         project  @relation(fields: [idproject], references: [idproject])
+  state           state    @relation(fields: [idstate], references: [idstate])
 }
 
-model SyncLog {
-  idLog     Int      @id @default(autoincrement())
-  idUser    Int
+model synclog {
+  idlog     Int      @id @default(autoincrement())
+  iduser    Int
   timestamp DateTime
   action    String   @db.VarChar(100)
   status    String   @db.VarChar(50)
-  User      user     @relation(fields: [idUser], references: [idUser])
+  user      user     @relation(fields: [iduser], references: [iduser])
 }

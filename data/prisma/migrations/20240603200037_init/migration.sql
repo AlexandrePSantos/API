@@ -1,68 +1,68 @@
--- Criação da tabela UserType
-CREATE TABLE UserType (
-    idType SERIAL PRIMARY KEY,
+-- Criação da tabela usertype
+CREATE TABLE usertype (
+    idtype SERIAL PRIMARY KEY,
     type VARCHAR(50) NOT NULL
 );
 
 -- Criação da tabela "User"
 CREATE TABLE "user" (
-    idUser SERIAL PRIMARY KEY,
+    iduser SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     photo TEXT,
     password VARCHAR(255) NOT NULL,
-    idType INT,
+    idtype INT,
     username VARCHAR(50) UNIQUE,
     name VARCHAR(100),
     last_login TIMESTAMP,
-    FOREIGN KEY (idType) REFERENCES UserType(idType)
+    FOREIGN KEY (idtype) REFERENCES usertype(idtype)
 );
 
--- Criação da tabela State
-CREATE TABLE State (
-    idState SERIAL PRIMARY KEY,
+-- Criação da tabela state
+CREATE TABLE state (
+    idstate SERIAL PRIMARY KEY,
     state VARCHAR(50) NOT NULL
 );
 
--- Criação da tabela Project
-CREATE TABLE Project (
-    idProject SERIAL PRIMARY KEY,
-    nameProject VARCHAR(100) NOT NULL,
-    startDateP DATE,
-    endDateP DATE,
-    idState INT,
-    idUser INT,
-    completionStatus BOOLEAN DEFAULT FALSE,
-    performanceReview TEXT,
+-- Criação da tabela project
+CREATE TABLE project (
+    idproject SERIAL PRIMARY KEY,
+    nameproject VARCHAR(100) NOT NULL,
+    startdatep DATE,
+    enddatep DATE,
+    idstate INT,
+    iduser INT,
+    completionstatus BOOLEAN DEFAULT FALSE,
+    performancereview TEXT,
     obs TEXT,
-    FOREIGN KEY (idState) REFERENCES State(idState),
-    FOREIGN KEY (idUser) REFERENCES "user"(idUser)
+    FOREIGN KEY (idstate) REFERENCES state(idstate),
+    FOREIGN KEY (iduser) REFERENCES "user"(iduser)
 );
 
--- Criação da tabela Task
-CREATE TABLE Task (
-    idTask SERIAL PRIMARY KEY,
-    nameTask VARCHAR(100) NOT NULL,
-    startDateT DATE,
-    endDateT DATE,
-    idProject INT,
-    idState INT,
+-- Criação da tabela task
+CREATE TABLE task (
+    idtask SERIAL PRIMARY KEY,
+    nametask VARCHAR(100) NOT NULL,
+    startdatet DATE,
+    enddatet DATE,
+    idproject INT,
+    idstate INT,
     photo TEXT,
-    timeSpend TIME,
+    timespend TIME,
     local VARCHAR(100),
     taxes DECIMAL(10, 2),
-    completionRate DECIMAL(5, 2),
+    completionrate DECIMAL(5, 2),
     photos TEXT,
     observations TEXT,
-    FOREIGN KEY (idProject) REFERENCES Project(idProject),
-    FOREIGN KEY (idState) REFERENCES State(idState)
+    FOREIGN KEY (idproject) REFERENCES project(idproject),
+    FOREIGN KEY (idstate) REFERENCES state(idstate)
 );
 
 -- Criação da tabela SyncLog
-CREATE TABLE SyncLog (
-    idLog SERIAL PRIMARY KEY,
-    idUser INT,
+CREATE TABLE synclog (
+    idlog SERIAL PRIMARY KEY,
+    iduser INT,
     "timestamp" TIMESTAMP,
     action VARCHAR(100),
     status VARCHAR(50),
-    FOREIGN KEY (idUser) REFERENCES "user"(idUser)
+    FOREIGN KEY (iduser) REFERENCES "user"(iduser)
 );

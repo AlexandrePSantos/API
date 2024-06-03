@@ -13,11 +13,11 @@ exports.getAll = async (req, res) => {
 
 // Return state by id
 exports.getById = async (req, res) => {
-    const id = req.params.idState;
+    const id = req.params.idstate;
     try {
         const response = await prisma.state.findUnique({
             where: {
-                idState: Number(id),
+                idstate: Number(id),
             },
         })
         res.status(200).json(response)
@@ -43,13 +43,13 @@ exports.create = async (req, res) => {
 
 // Update state
 exports.update = async (req, res) => {
-    const id = req.params.idState;
+    const id = req.params.idstate;
     const { state } = req.body;
 
     try {
         const updatedState = await prisma.state.update({
             where: {
-                idState: Number(id),
+                idstate: Number(id),
             },
             data: {
                 state: state
@@ -63,11 +63,11 @@ exports.update = async (req, res) => {
 
 // Delete state by id
 exports.delete = async (req, res) => {
-    const id = req.params.idState;
+    const id = req.params.idstate;
     try {
         await prisma.state.delete({
             where: {
-                idState: Number(id),
+                idstate: Number(id),
             },
         })
         res.status(200).send("ok");

@@ -13,11 +13,11 @@ exports.getAll = async (req, res) => {
 
 // Return project by id
 exports.getById = async (req, res) => {
-    const id = req.params.idProject;
+    const id = req.params.idproject;
     try {
         const response = await prisma.project.findUnique({
             where: {
-                idProject: Number(id),
+                idproject: Number(id),
             },
         })
         res.status(200).json(response)
@@ -28,17 +28,17 @@ exports.getById = async (req, res) => {
 
 // Create project
 exports.create = async (req, res) => {
-    const { nameProject, startDateP, endDateP, idState, idUser, completionStatus, performanceReview, obs } = req.body;
+    const { nameproject, startdatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
     try {
         const project = await prisma.project.create({
             data: {
-                nameProject: nameProject,
-                startDateP: startDateP,
-                endDateP: endDateP,
-                idState: idState,
-                idUser: idUser,
-                completionStatus: completionStatus,
-                performanceReview: performanceReview,
+                nameproject: nameproject,
+                startsatep: startdatep,
+                enddatep: enddatep,
+                idstate: idstate,
+                iduser: iduser,
+                completionstatus: completionstatus,
+                performancereview: performancereview,
                 obs: obs
             },
         })
@@ -50,22 +50,22 @@ exports.create = async (req, res) => {
 
 // Update project
 exports.update = async (req, res) => {
-    const id = req.params.idProject;
-    const { nameProject, startDateP, endDateP, idState, idUser, completionStatus, performanceReview, obs } = req.body;
+    const id = req.params.idproject;
+    const { nameproject, startsatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
 
     try {
         const project = await prisma.project.update({
             where: {
-                idProject: Number(id),
+                idproject: Number(id),
             },
             data: {
-                nameProject: nameProject,
-                startDateP: startDateP,
-                endDateP: endDateP,
-                idState: idState,
-                idUser: idUser,
-                completionStatus: completionStatus,
-                performanceReview: performanceReview,
+                nameproject: nameproject,
+                startsatep: startsatep,
+                enddatep: enddatep,
+                idstate: idstate,
+                iduser: iduser,
+                completionstatus: completionstatus,
+                performancereview: performancereview,
                 obs: obs
             },
         })
@@ -77,11 +77,11 @@ exports.update = async (req, res) => {
 
 // Delete project by id
 exports.delete = async (req, res) => {
-    const id = req.params.idProject;
+    const id = req.params.idproject;
     try {
         await prisma.project.delete({
             where: {
-                idProject: Number(id),
+                idproject: Number(id),
             },
         })
         res.status(200).send("ok");
@@ -92,16 +92,16 @@ exports.delete = async (req, res) => {
 
 // Lista todas as tarefas de um projeto específico
 exports.getTasks = async (req, res) => {
-    const idProject = req.params.idProject;
+    const idproject = req.params.idproject;
     try {
         const tasks = await prisma.$queryRaw`
             SELECT 
-                t.idTask,
+                t.idtask,
                 t.name
             FROM 
                 Task t
             WHERE 
-                t.idProject = ${idProject}
+                t.idproject = ${idproject}
         `;
         res.status(200).json(tasks)
     } catch (error) {
@@ -111,18 +111,18 @@ exports.getTasks = async (req, res) => {
 
 // Lista todos os usuários associados a um projeto específico
 exports.getUsers = async (req, res) => {
-    const idProject = req.params.idProject;
+    const idproject = req.params.idproject;
     try {
         const users = await prisma.$queryRaw`
             SELECT 
-                u.idUser,
+                u.iduser,
                 u.name
             FROM 
                 User u
             INNER JOIN 
-                UserProject up ON u.idUser = up.idUser
+                userproject up ON u.iduser = up.iduser
             WHERE 
-                up.idProject = ${idProject}
+                up.idproject = ${idproject}
         `;
         res.status(200).json(users)
     } catch (error) {
@@ -132,12 +132,12 @@ exports.getUsers = async (req, res) => {
 
 // Associa um usuário a um projeto
 exports.assignUser = async (req, res) => {
-    const idProject = req.params.idProject;
-    const idUser = req.params.idUser;
+    const idproject = req.params.idproject;
+    const iduser = req.params.iduser;
     try {
         await prisma.$queryRaw`
-            INSERT INTO UserProject (idUser, idProject)
-            VALUES (${idUser}, ${idProject})
+            INSERT INTO userproject (iduser, idproject)
+            VALUES (${iduser}, ${idproject})
         `;
         res.status(200).json({ msg: 'User assigned to project successfully.' })
     } catch (error) {
@@ -147,12 +147,12 @@ exports.assignUser = async (req, res) => {
 
 // Remove um usuário de um projeto
 exports.removeUser = async (req, res) => {
-    const idProject = req.params.idProject;
-    const idUser = req.params.idUser;
+    const idproject = req.params.idproject;
+    const iduser = req.params.iduser;
     try {
         await prisma.$queryRaw`
-            DELETE FROM UserProject 
-            WHERE idUser = ${idUser} AND idProject = ${idProject}
+            DELETE FROM userproject 
+            WHERE iduser = ${iduser} AND idproject = ${idproject}
         `;
         res.status(200).json({ msg: 'User removed from project successfully.' })
     } catch (error) {
@@ -162,14 +162,14 @@ exports.removeUser = async (req, res) => {
 
 // Marca um projeto como concluído
 exports.completeProject = async (req, res) => {
-    const idProject = req.params.idProject;
+    const idproject = req.params.idproject;
     try {
         await prisma.$queryRaw`
-            UPDATE Project 
-            SET idState = (SELECT idState FROM State WHERE state = 'completo') 
-            WHERE idProject = ${idProject}
+            UPDATE project 
+            SET idstate = (SELECT idstate FROM State WHERE state = 'completo') 
+            WHERE idproject = ${idproject}
         `;
-        res.status(200).json({ msg: 'Project marked as complete successfully.' })
+        res.status(200).json({ msg: 'project marked as complete successfully.' })
     } catch (error) {
         res.status(500).json({ msg: error.message })
     }
@@ -177,15 +177,15 @@ exports.completeProject = async (req, res) => {
 
 // Define a avaliação de desempenho de um projeto
 exports.setPerformanceReview = async (req, res) => {
-    const idProject = req.params.idProject;
-    const { performanceReview } = req.body;
+    const idproject = req.params.idproject;
+    const { performancereview } = req.body;
     try {
         await prisma.$queryRaw`
-            UPDATE Project 
-            SET performanceReview = ${performanceReview} 
-            WHERE idProject = ${idProject}
+            UPDATE project 
+            SET performancereview = ${performancereview} 
+            WHERE idproject = ${idproject}
         `;
-        res.status(200).json({ msg: 'Project performance review updated successfully.' })
+        res.status(200).json({ msg: 'project performance review updated successfully.' })
     } catch (error) {
         res.status(500).json({ msg: error.message })
     }

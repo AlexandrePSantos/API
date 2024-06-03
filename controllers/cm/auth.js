@@ -28,7 +28,7 @@ exports.signin = async (req, res) => {
 
             if (passwordIsValid) {
                 const accessToken = authenticateUtil.generateAccessToken({ id: user.id, name: user.name });
-                res.status(200).json({ idUser: user.idUser, name: user.name, token: accessToken });
+                res.status(200).json({ idUser: user.iduser, name: user.name, token: accessToken });
                 return;
             }
         } else {
@@ -54,7 +54,7 @@ exports.signup = async (req, res) => {
                 username: username,
                 name: name,
                 password: bcrypt.hashSync(password, 8),
-                idType: 3
+                idtype: 3
             },
         })
 
