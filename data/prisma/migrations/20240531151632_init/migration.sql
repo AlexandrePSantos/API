@@ -5,7 +5,7 @@ CREATE TABLE UserType (
 );
 
 -- Criação da tabela User
-CREATE TABLE User (
+CREATE TABLE "User" (
     idUser SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     photo TEXT,
@@ -35,7 +35,7 @@ CREATE TABLE Project (
     performanceReview TEXT,
     obs TEXT,
     FOREIGN KEY (idState) REFERENCES State(idState),
-    FOREIGN KEY (idUser) REFERENCES User(idUser)
+    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
 );
 
 -- Criação da tabela Task
@@ -64,10 +64,10 @@ CREATE TABLE SyncLog (
     "timestamp" TIMESTAMP,
     action VARCHAR(100),
     status VARCHAR(50),
-    FOREIGN KEY (idUser) REFERENCES User(idUser)
+    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
 );
 
 -- Criação de índices para melhorar o desempenho
-CREATE INDEX idx_user_email ON User(email);
+CREATE INDEX idx_user_email ON "User"(email);
 CREATE INDEX idx_project_user ON Project(idUser);
 CREATE INDEX idx_task_project ON Task(idProject);
