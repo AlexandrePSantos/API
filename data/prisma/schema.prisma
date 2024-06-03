@@ -17,7 +17,6 @@ model UserType {
   idType      Int          @id @default(autoincrement())
   type        String       @db.VarChar(50)
   User        User[]
-  Permission  Permission[]
 }
 
 model User {
@@ -32,8 +31,6 @@ model User {
   UserType    UserType     @relation(fields: [idType], references: [idType])
   Project     Project[]
   SyncLog     SyncLog[]
-  LocalBackup LocalBackup[]
-  AuthToken   AuthToken[]
 }
 
 model State {
@@ -66,7 +63,7 @@ model Task {
   idProject       Int
   idState         Int
   photo           String?  @db.Text
-  timeSpend       DateTime?
+  timeSpent       Int?
   local           String?  @db.VarChar(100)
   taxes           Decimal?   @db.Decimal(10, 2)
   completionRate  Decimal?   @db.Decimal(5, 2)
@@ -76,19 +73,6 @@ model Task {
   State           State    @relation(fields: [idState], references: [idState])
 }
 
-model Permission {
-  idPermission       Int      @id @default(autoincrement())
-  role               String   @db.VarChar(50)
-  can_create_project Boolean?
-  can_edit_project   Boolean?
-  can_delete_project Boolean?
-  can_manage_users   Boolean?
-  can_assign_tasks   Boolean?
-  can_export_stats   Boolean?
-  idType             Int
-  UserType           UserType @relation(fields: [idType], references: [idType])
-}
-
 model SyncLog {
   idLog     Int      @id @default(autoincrement())
   idUser    Int
@@ -96,20 +80,4 @@ model SyncLog {
   action    String   @db.VarChar(100)
   status    String   @db.VarChar(50)
   User      User     @relation(fields: [idUser], references: [idUser])
-}
-
-model LocalBackup {
-  idBackup  Int      @id @default(autoincrement())
-  data      Bytes
-  timestamp DateTime
-  idUser    Int
-  User      User     @relation(fields: [idUser], references: [idUser])
-}
-
-model AuthToken {
-  idToken Int      @id @default(autoincrement())
-  idUser  Int
-  token   String   @db.VarChar(255)
-  expires DateTime
-  User    User     @relation(fields: [idUser], references: [idUser])
 }

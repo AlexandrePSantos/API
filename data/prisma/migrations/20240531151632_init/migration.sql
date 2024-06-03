@@ -5,7 +5,7 @@ CREATE TABLE UserType (
 );
 
 -- Criação da tabela User
-CREATE TABLE "User" (
+CREATE TABLE User (
     idUser SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     photo TEXT,
@@ -35,7 +35,7 @@ CREATE TABLE Project (
     performanceReview TEXT,
     obs TEXT,
     FOREIGN KEY (idState) REFERENCES State(idState),
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
+    FOREIGN KEY (idUser) REFERENCES User(idUser)
 );
 
 -- Criação da tabela Task
@@ -57,20 +57,6 @@ CREATE TABLE Task (
     FOREIGN KEY (idState) REFERENCES State(idState)
 );
 
--- Criação da tabela Permission
-CREATE TABLE Permission (
-    idPermission SERIAL PRIMARY KEY,
-    role VARCHAR(50) NOT NULL,
-    can_create_project BOOLEAN,
-    can_edit_project BOOLEAN,
-    can_delete_project BOOLEAN,
-    can_manage_users BOOLEAN,
-    can_assign_tasks BOOLEAN,
-    can_export_stats BOOLEAN,
-    idType INT,
-    FOREIGN KEY (idType) REFERENCES UserType(idType)
-);
-
 -- Criação da tabela SyncLog
 CREATE TABLE SyncLog (
     idLog SERIAL PRIMARY KEY,
@@ -78,28 +64,10 @@ CREATE TABLE SyncLog (
     "timestamp" TIMESTAMP,
     action VARCHAR(100),
     status VARCHAR(50),
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
-);
-
--- Criação da tabela LocalBackup
-CREATE TABLE LocalBackup (
-    idBackup SERIAL PRIMARY KEY,
-    data BYTEA,
-    "timestamp" TIMESTAMP,
-    idUser INT,
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
-);
-
--- Criação da tabela AuthToken
-CREATE TABLE AuthToken (
-    idToken SERIAL PRIMARY KEY,
-    idUser INT,
-    token VARCHAR(255) NOT NULL,
-    expires TIMESTAMP,
-    FOREIGN KEY (idUser) REFERENCES "User"(idUser)
+    FOREIGN KEY (idUser) REFERENCES User(idUser)
 );
 
 -- Criação de índices para melhorar o desempenho
-CREATE INDEX idx_user_email ON "User"(email);
+CREATE INDEX idx_user_email ON User(email);
 CREATE INDEX idx_project_user ON Project(idUser);
 CREATE INDEX idx_task_project ON Task(idProject);
