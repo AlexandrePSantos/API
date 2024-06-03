@@ -6,6 +6,7 @@ const userRouter = require('./user');
 const userTypeRouter = require('./userType');
 const authRouter = require('./auth');
 const statsRouter = require('./stats');
+const syncLogRouter = require('./syncLog');
 
 router.use('/auth', authRouter);
 router.use('/project', projectRouter);
