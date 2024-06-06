@@ -35,8 +35,16 @@ exports.create = async (req, res) => {
                 nameTask: nameTask,
                 startDateT: startDateT,
                 endDateT: endDateT,
-                idProject: idProject,
-                idState: idState,
+                idProject: {
+                    connect: {
+                        idproject: idProject
+                    }
+                },
+                idState: {
+                    connect: {
+                        idState: idState
+                    }
+                },
                 photo: photo,
                 timeSpend: timeSpend,
                 local: local,
@@ -66,8 +74,16 @@ exports.update = async (req, res) => {
                 nameTask: nameTask,
                 startDateT: startDateT,
                 endDateT: endDateT,
-                idProject: idProject,
-                idState: idState,
+                idProject: {
+                    connect: {
+                        idproject: idProject
+                    }
+                },
+                idState: {
+                    connect: {
+                        idState: idState
+                    }
+                },
                 photo: photo,
                 timeSpend: timeSpend,
                 local: local,

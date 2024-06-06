@@ -29,7 +29,7 @@ exports.getById = async (req, res) => {
 
 // Create user
 exports.create = async (req, res) => {
-    const { email, photo, password, idType, username, name, last_login } = req.body;
+    const { email, photo, password, idtype, username, name, last_login } = req.body;
     var hashedPassword = bcrypt.hashSync(password, 8);
     try {
         const user = await prisma.user.create({
@@ -37,7 +37,11 @@ exports.create = async (req, res) => {
                 email: email,
                 photo: photo,
                 password: hashedPassword,
-                idType: idType,
+                idtype: {
+                    connect: {
+                        idtype: idtype
+                    }
+                },
                 username: username,
                 name: name,
                 last_login: last_login
@@ -48,10 +52,11 @@ exports.create = async (req, res) => {
         res.status(400).json({ msg: error.message })
     }
 }
+
 // Update user
 exports.update = async (req, res) => {
     const id = req.params.idUser;
-    const { email, photo, password, idType, username, name, last_login } = req.body;
+    const { email, photo, password, idtype, username, name, last_login } = req.body;
 
     var hashedPassword = bcrypt.hashSync(password, 8);
     
@@ -64,7 +69,11 @@ exports.update = async (req, res) => {
                 email: email,
                 photo: photo,
                 password: hashedPassword,
-                idType: idType,
+                idtype: {
+                    connect: {
+                        idtype: idtype
+                    }
+                },
                 username: username,
                 name: name,
                 last_login: last_login

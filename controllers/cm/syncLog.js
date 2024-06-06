@@ -32,7 +32,11 @@ exports.create = async (req, res) => {
     try {
         const syncLog = await prisma.syncLog.create({
             data: {
-                idUser: idUser,
+                idUser: {
+                    connect: {
+                        idUser: idUser
+                    }
+                },
                 timestamp: timestamp,
                 action: action,
                 status: status
@@ -55,7 +59,11 @@ exports.update = async (req, res) => {
                 idLog: Number(id),
             },
             data: {
-                idUser: idUser,
+                idUser: {
+                    connect: {
+                        idUser: idUser
+                    }
+                },
                 timestamp: timestamp,
                 action: action,
                 status: status

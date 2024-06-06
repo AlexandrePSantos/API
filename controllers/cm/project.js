@@ -35,8 +35,16 @@ exports.create = async (req, res) => {
                 nameproject: nameproject,
                 startsatep: startdatep,
                 enddatep: enddatep,
-                idstate: idstate,
-                iduser: iduser,
+                idstate: {
+                    connect: {
+                        idstate: idstate
+                    }
+                },
+                iduser: {
+                    connect: {
+                        iduser: iduser
+                    }
+                },
                 completionstatus: completionstatus,
                 performancereview: performancereview,
                 obs: obs
@@ -62,8 +70,16 @@ exports.update = async (req, res) => {
                 nameproject: nameproject,
                 startsatep: startsatep,
                 enddatep: enddatep,
-                idstate: idstate,
-                iduser: iduser,
+                idstate: {
+                    connect: {
+                        idstate: idstate
+                    }
+                },
+                iduser: {
+                    connect: {
+                        iduser: iduser
+                    }
+                },
                 completionstatus: completionstatus,
                 performancereview: performancereview,
                 obs: obs
