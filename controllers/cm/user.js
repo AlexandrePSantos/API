@@ -37,11 +37,7 @@ exports.create = async (req, res) => {
                 email: email,
                 photo: photo,
                 password: hashedPassword,
-                idtype: {
-                    connect: {
-                        idtype: idtype
-                    }
-                },
+                idtype: idtype,
                 username: username,
                 name: name,
                 last_login: last_login

@@ -16,7 +16,6 @@ datasource db {
 model usertype {
   idtype      Int          @id @default(autoincrement())
   type        String       @db.VarChar(50)
-  user        user[]
 }
 
 model user {
@@ -28,16 +27,11 @@ model user {
   username    String?      @unique @db.VarChar(50)
   name        String?      @db.VarChar(100)
   last_login  DateTime?
-  usertype    usertype     @relation(fields: [idtype], references: [idtype])
-  project     project[]
-  SyncLog     synclog[]
 }
 
 model state {
   idstate  Int      @id @default(autoincrement())
   state    String   @db.VarChar(50)
-  project  project[]
-  task     task[]
 }
 
 model project {
@@ -50,9 +44,6 @@ model project {
   completionstatus   Boolean  @default(false)
   performancereview  String?  @db.Text
   obs                String?  @db.Text
-  state              state    @relation(fields: [idstate], references: [idstate])
-  user               user     @relation(fields: [iduser], references: [iduser])
-  task               task[]
 }
 
 model task {
@@ -69,8 +60,6 @@ model task {
   completionrate  Decimal? @db.Decimal(5, 2)
   photos          String?  @db.Text
   observations    String?  @db.Text
-  project         project  @relation(fields: [idproject], references: [idproject])
-  state           state    @relation(fields: [idstate], references: [idstate])
 }
 
 model synclog {
@@ -79,5 +68,4 @@ model synclog {
   timestamp DateTime
   action    String   @db.VarChar(100)
   status    String   @db.VarChar(50)
-  user      user     @relation(fields: [iduser], references: [iduser])
 }
