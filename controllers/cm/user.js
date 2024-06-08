@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
 
 // Update user
 exports.update = async (req, res) => {
-    const id = req.params.idUser;
+    const id = req.params.iduser;
     const { email, photo, password, idtype, username, name, last_login } = req.body;
 
     var hashedPassword = bcrypt.hashSync(password, 8);
@@ -59,7 +59,7 @@ exports.update = async (req, res) => {
     try {
         const user = await prisma.user.update({
             where: {
-                idUser: Number(id),
+                iduser: Number(id),
             },
             data: {
                 email: email,
