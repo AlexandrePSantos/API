@@ -9,7 +9,7 @@ exports.userStats = async (req, res) => {
             SELECT 
                 u.idUser,
                 u.name,
-                COUNT(t.idTask) AS tasksCompleted,
+                COUNT(t.idtask) AS tasksCompleted,
                 SUM(t.timeSpent) AS totalTimeSpent,
                 COUNT(DISTINCT p.idProject) AS projectsCompleted
             FROM 
@@ -37,7 +37,7 @@ exports.projectStats = async (req, res) => {
             SELECT 
                 p.idProject,
                 p.name,
-                COUNT(t.idTask) AS tasksCompleted,
+                COUNT(t.idtask) AS tasksCompleted,
                 SUM(t.timeSpent) AS totalTimeSpent
             FROM 
                 Project p
@@ -56,11 +56,11 @@ exports.projectStats = async (req, res) => {
 
 // Retorna estatísticas para uma tarefa específica
 exports.taskStats = async (req, res) => {
-    const idTask = req.params.idTask; // Obtenha o idTask do parâmetro da rota
+    const idtask = req.params.idtask; // Obtenha o idtask do parâmetro da rota
     try {
         const stats = await prisma.$queryRaw`
             SELECT 
-                t.idTask,
+                t.idtask,
                 t.nameTask,
                 s.state
             FROM 
@@ -68,7 +68,7 @@ exports.taskStats = async (req, res) => {
             LEFT JOIN 
                 State s ON t.idState = s.idState
             WHERE 
-                t.idTask = ${idTask} 
+                t.idtask = ${idtask} 
         `;
         res.status(200).json(stats)
     } catch (error) {

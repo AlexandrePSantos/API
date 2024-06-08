@@ -13,11 +13,11 @@ exports.getAll = async (req, res) => {
 
 // Return task by id
 exports.getById = async (req, res) => {
-    const id = req.params.idTask;
+    const id = req.params.idtask;
     try {
         const response = await prisma.task.findUnique({
             where: {
-                idTask: Number(id),
+                idtask: Number(id),
             },
         })
         res.status(200).json(response)
@@ -62,13 +62,13 @@ exports.create = async (req, res) => {
 
 // Update task
 exports.update = async (req, res) => {
-    const id = req.params.idTask;
+    const id = req.params.idtask;
     const { nameTask, startDateT, endDateT, idProject, idState, photo, timeSpend, local, taxes, completionRate, photos, observations } = req.body;
 
     try {
         const task = await prisma.task.update({
             where: {
-                idTask: Number(id),
+                idtask: Number(id),
             },
             data: {
                 nameTask: nameTask,
@@ -101,11 +101,11 @@ exports.update = async (req, res) => {
 
 // Delete task by id
 exports.delete = async (req, res) => {
-    const id = req.params.idTask;
+    const id = req.params.idtask;
     try {
         await prisma.task.delete({
             where: {
-                idTask: Number(id),
+                idtask: Number(id),
             },
         })
         res.status(200).send("ok");
@@ -116,7 +116,7 @@ exports.delete = async (req, res) => {
 
 // Lista todos os usuários associados a uma tarefa específica
 exports.getUsers = async (req, res) => {
-    const idTask = req.params.idTask;
+    const idtask = req.params.idtask;
     try {
         const users = await prisma.$queryRaw`
             SELECT 
@@ -127,7 +127,7 @@ exports.getUsers = async (req, res) => {
             INNER JOIN 
                 UserTask ut ON u.idUser = ut.idUser
             WHERE 
-                ut.idTask = ${idTask}
+                ut.idtask = ${idtask}
         `;
         res.status(200).json(users)
     } catch (error) {
@@ -137,12 +137,12 @@ exports.getUsers = async (req, res) => {
 
 // Associa um usuário a uma tarefa
 exports.assignUser = async (req, res) => {
-    const idTask = req.params.idTask;
+    const idtask = req.params.idtask;
     const idUser = req.params.idUser;
     try {
         await prisma.$queryRaw`
-            INSERT INTO UserTask (idUser, idTask)
-            VALUES (${idUser}, ${idTask})
+            INSERT INTO UserTask (idUser, idtask)
+            VALUES (${idUser}, ${idtask})
         `;
         res.status(200).json({ msg: 'User assigned to task successfully.' })
     } catch (error) {
@@ -152,12 +152,12 @@ exports.assignUser = async (req, res) => {
 
 // Remove um usuário de uma tarefa
 exports.removeUser = async (req, res) => {
-    const idTask = req.params.idTask;
+    const idtask = req.params.idtask;
     const idUser = req.params.idUser;
     try {
         await prisma.$queryRaw`
             DELETE FROM UserTask 
-            WHERE idUser = ${idUser} AND idTask = ${idTask}
+            WHERE idUser = ${idUser} AND idtask = ${idtask}
         `;
         res.status(200).json({ msg: 'User removed from task successfully.' })
     } catch (error) {
@@ -167,12 +167,12 @@ exports.removeUser = async (req, res) => {
 
 // Marca uma tarefa como concluída
 exports.completeTask = async (req, res) => {
-    const idTask = req.params.idTask;
+    const idtask = req.params.idtask;
     try {
         await prisma.$queryRaw`
             UPDATE Task 
             SET idState = (SELECT idState FROM State WHERE state = 'completo') 
-            WHERE idTask = ${idTask}
+            WHERE idtask = ${idtask}
         `;
         res.status(200).json({ msg: 'Task marked as complete successfully.' })
     } catch (error) {
@@ -182,13 +182,13 @@ exports.completeTask = async (req, res) => {
 
 // Define o estado de uma tarefa
 exports.setState = async (req, res) => {
-    const idTask = req.params.idTask;
+    const idtask = req.params.idtask;
     const { state } = req.body;
     try {
         await prisma.$queryRaw`
             UPDATE Task 
             SET idState = (SELECT idState FROM State WHERE state = ${state}) 
-            WHERE idTask = ${idTask}
+            WHERE idtask = ${idtask}
         `;
         res.status(200).json({ msg: 'Task state updated successfully.' })
     } catch (error) {

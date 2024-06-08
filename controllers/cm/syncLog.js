@@ -77,11 +77,11 @@ exports.update = async (req, res) => {
 
 // Delete sync log by id
 exports.delete = async (req, res) => {
-    const id = req.params.idLog;
+    const id = req.params.idlog;
     try {
-        await prisma.syncLog.delete({
+        await prisma.synclog.delete({
             where: {
-                idLog: Number(id),
+                idlog: Number(id),
             },
         })
         res.status(200).send("ok");

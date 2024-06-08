@@ -63,11 +63,11 @@ exports.update = async (req, res) => {
 
 // Delete user type by id
 exports.delete = async (req, res) => {
-    const id = req.params.idType;
+    const id = req.params.idtype;
     try {
-        await prisma.userType.delete({
+        await prisma.usertype.delete({
             where: {
-                idType: Number(id),
+                idtype: Number(id),
             },
         })
         res.status(200).send("ok");
