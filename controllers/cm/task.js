@@ -35,7 +35,7 @@ exports.create = async (req, res) => {
                 nametask: nametask,
                 startdatet: startdatet,
                 enddatet: enddatet,
-                idproject: idproject:,
+                idproject: idproject,
                 idstate: idstate,
                 photo: photo,
                 timespend: timespend,
