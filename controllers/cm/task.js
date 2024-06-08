@@ -28,28 +28,20 @@ exports.getById = async (req, res) => {
 
 // Create task
 exports.create = async (req, res) => {
-    const { nameTask, startDateT, endDateT, idProject, idState, photo, timeSpend, local, taxes, completionRate, photos, observations } = req.body;
+    const { nametask, startdatet, enddatet, idproject, idstate, photo, timespend, local, taxes, completionrate, photos, observations } = req.body;
     try {
         const task = await prisma.task.create({
             data: {
-                nameTask: nameTask,
-                startDateT: startDateT,
-                endDateT: endDateT,
-                idProject: {
-                    connect: {
-                        idproject: idProject
-                    }
-                },
-                idState: {
-                    connect: {
-                        idState: idState
-                    }
-                },
+                nametask: nametask,
+                startdatet: startdatet,
+                enddatet: enddatet,
+                idproject: idproject:,
+                idstate: idstate,
                 photo: photo,
-                timeSpend: timeSpend,
+                timespend: timespend,
                 local: local,
                 taxes: taxes,
-                completionRate: completionRate,
+                completionrate: completionrate,
                 photos: photos,
                 observations: observations
             },
@@ -63,7 +55,7 @@ exports.create = async (req, res) => {
 // Update task
 exports.update = async (req, res) => {
     const id = req.params.idtask;
-    const { nameTask, startDateT, endDateT, idProject, idState, photo, timeSpend, local, taxes, completionRate, photos, observations } = req.body;
+    const { nametask, startdatet, enddatet, idproject, idstate, photo, timespend, local, taxes, completionrate, photos, observations } = req.body;
 
     try {
         const task = await prisma.task.update({
@@ -71,24 +63,16 @@ exports.update = async (req, res) => {
                 idtask: Number(id),
             },
             data: {
-                nameTask: nameTask,
-                startDateT: startDateT,
-                endDateT: endDateT,
-                idProject: {
-                    connect: {
-                        idproject: idProject
-                    }
-                },
-                idState: {
-                    connect: {
-                        idState: idState
-                    }
-                },
+                nametask: nametask,
+                startdatet: startdatet,
+                enddatet: enddatet,
+                idproject: idproject,
+                idstate: idstate,               
                 photo: photo,
-                timeSpend: timeSpend,
+                timespend: timespend,
                 local: local,
                 taxes: taxes,
-                completionRate: completionRate,
+                completionrate: completionrate,
                 photos: photos,
                 observations: observations
             },
@@ -171,7 +155,7 @@ exports.completeTask = async (req, res) => {
     try {
         await prisma.$queryRaw`
             UPDATE Task 
-            SET idState = (SELECT idState FROM State WHERE state = 'completo') 
+            SET idstate = (SELECT idstate FROM State WHERE state = 'completo') 
             WHERE idtask = ${idtask}
         `;
         res.status(200).json({ msg: 'Task marked as complete successfully.' })
@@ -187,7 +171,7 @@ exports.setState = async (req, res) => {
     try {
         await prisma.$queryRaw`
             UPDATE Task 
-            SET idState = (SELECT idState FROM State WHERE state = ${state}) 
+            SET idstate = (SELECT idstate FROM State WHERE state = ${state}) 
             WHERE idtask = ${idtask}
         `;
         res.status(200).json({ msg: 'Task state updated successfully.' })
