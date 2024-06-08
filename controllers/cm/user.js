@@ -54,7 +54,7 @@ exports.update = async (req, res) => {
     const id = req.params.iduser;
     const { email, photo, password, idtype, username, name, last_login } = req.body;
 
-    var hashedPassword = bcrypt.hashSync(password, 8);
+    var hashedPassword = currentUser.password === password ? password : bcrypt.hashSync(password, 8);
     
     try {
         const user = await prisma.user.update({
