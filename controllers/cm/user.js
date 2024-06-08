@@ -54,9 +54,22 @@ exports.update = async (req, res) => {
     const id = req.params.iduser;
     const { email, photo, password, idtype, username, name, last_login } = req.body;
 
-    var hashedPassword = currentUser.password === password ? password : bcrypt.hashSync(password, 8);
-    
     try {
+        // Get the current user details
+        const currentUser = await prisma.user.findUnique({
+            where: {
+                iduser: Number(id),
+            },
+        });
+
+        // If currentUser is null or undefined, return an error
+        if (!currentUser) {
+            return res.status(404).json({ msg: "User not found" });
+        }
+
+        // Check if the password has changed
+        var hashedPassword = currentUser.password === password ? password : bcrypt.hashSync(password, 8);
+
         const user = await prisma.user.update({
             where: {
                 iduser: Number(id),
