@@ -1,8 +1,8 @@
-const prisma = require('@prisma/client');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 
 exports.createUserTask = async (req, res) => {
-  const { userId, taskId } = req.body;
+  const { iduser, idtask } = req.body;
   const usertask = await prisma.usertask.create({
     data: {
       iduser,
