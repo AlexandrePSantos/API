@@ -53,13 +53,9 @@ model task {
   enddatet        DateTime?
   idproject       Int
   idstate         Int
-  photo           String?  @db.Text
   timespend       Int?
   local           String?  @db.VarChar(100)
-  taxes           Decimal? @db.Decimal(10, 2)
   completionrate  Decimal? @db.Decimal(5, 2)
-  photos          String?  @db.Text
-  observations    String?  @db.Text
 }
 
 model synclog {
