@@ -69,3 +69,15 @@ model synclog {
   action    String   @db.VarChar(100)
   status    String   @db.VarChar(50)
 }
+
+model usertask {
+  idusertask  Int      @id @default(autoincrement())
+  iduser      Int
+  idtask      Int
+}
+
+model obs {
+  idobs       Int      @id @default(autoincrement())
+  idtask      Int
+  content String   @db.Text
+}
