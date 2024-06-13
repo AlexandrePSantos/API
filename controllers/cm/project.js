@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
         const project = await prisma.project.create({
             data: {
                 nameproject: nameproject,
-                startsatep: startdatep,
+                startdatep: startdatep,
                 enddatep: enddatep,
                 idstate: idstate,
                 iduser: iduser,
@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
 // Update project
 exports.update = async (req, res) => {
     const id = req.params.idproject;
-    const { nameproject, startsatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
+    const { nameproject, startdatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
 
     try {
         const project = await prisma.project.update({
@@ -60,7 +60,7 @@ exports.update = async (req, res) => {
             },
             data: {
                 nameproject: nameproject,
-                startsatep: startsatep,
+                startdatep: startdatep,
                 enddatep: enddatep,
                 idstate: idstate,
                 iduser: iduser,
