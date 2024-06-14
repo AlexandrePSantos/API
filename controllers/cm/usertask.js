@@ -14,9 +14,9 @@ exports.createUserTask = async (req, res) => {
 
 exports.getUserTasks = async (req, res) => {
   const usertask = await prisma.usertask.findMany({
-    include: {
-      user: true,
-      task: true,
+    data: {
+      iduser,
+      idtask,
     },
   });
   res.json(usertask);
