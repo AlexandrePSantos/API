@@ -37,8 +37,8 @@ model state {
 model project {
   idproject          Int      @id @default(autoincrement())
   nameproject        String   @db.VarChar(100)
-  startdatep         DateTime?
-  enddatep           DateTime?
+  startdatep         DateTime? @db.Date
+  enddatep           DateTime? @db.Date
   idstate            Int
   iduser             Int
   completionstatus   Boolean  @default(false)
@@ -49,8 +49,8 @@ model project {
 model task {
   idtask          Int      @id @default(autoincrement())
   nametask        String   @db.VarChar(100)
-  startdatet      DateTime?
-  enddatet        DateTime?
+  startdatet      DateTime? @db.Date
+  enddatet        DateTime? @db.Date
   idproject       Int
   idstate         Int
   timespend       Int?
