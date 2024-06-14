@@ -13,11 +13,10 @@ exports.createUserTask = async (req, res) => {
 };
 
 exports.getUserTasks = async (req, res) => {
-  const usertask = await prisma.usertask.findMany({
-    data: {
-      iduser,
-      idtask,
-    },
-  });
-  res.json(usertask);
+  try {
+    const response = await prisma.usertask.findMany();
+    res.status(200).json(response)
+  } catch (error) {
+      res.status(500).json({ msg: error.message })
+  }
 };
