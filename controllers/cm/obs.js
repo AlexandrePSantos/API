@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 // Return all observations
 exports.getAll = async (req, res) => {
     try {
-        const response = await prisma.project.findMany();
+        const response = await prisma.obs.findMany();
         res.status(200).json(response)
     } catch (error) {
         res.status(500).json({ msg: error.message })
