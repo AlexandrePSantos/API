@@ -74,6 +74,7 @@ model usertask {
 
 model obs {
   idobs       Int      @id @default(autoincrement())
+  iduser      Int
   idtask      Int
   content String   @db.Text
 }
