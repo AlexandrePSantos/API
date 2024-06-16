@@ -31,6 +31,8 @@ CREATE TABLE project (
     enddatep DATE,
     idstate INT,
     iduser INT,
+    performancereview TEXT,
+    obs TEXT,
     FOREIGN KEY (idstate) REFERENCES state(idstate),
     FOREIGN KEY (iduser) REFERENCES "user"(iduser)
 );
