@@ -28,12 +28,12 @@ exports.getById = async (req, res) => {
 
 // Create obs
 exports.create = async (req, res) => {
-    const { nameobs, idtask, content } = req.body;
+    const { idtask, content } = req.body;
     try {
         const obs = await prisma.obs.create({
             data: {
-                nameobs: nameobs,
                 idtask: idtask,
+                iduser:iduser,
                 content: content
             },
         })
