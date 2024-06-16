@@ -31,6 +31,7 @@ CREATE TABLE project (
     enddatep DATE,
     idstate INT,
     iduser INT,
+    completionstatus BOOLEAN DEFAULT FALSE,
     performancereview TEXT,
     obs TEXT,
     FOREIGN KEY (idstate) REFERENCES state(idstate),
