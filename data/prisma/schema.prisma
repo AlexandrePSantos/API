@@ -43,7 +43,6 @@ model project {
   iduser             Int
   completionstatus   Boolean  @default(false)
   performancereview  String?  @db.Text
-  obs                String?  @db.Text
 }
 
 model task {
