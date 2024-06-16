@@ -32,8 +32,6 @@ CREATE TABLE project (
     idstate INT,
     iduser INT,
     completionstatus BOOLEAN DEFAULT FALSE,
-    performancereview TEXT,
-    obs TEXT,
     FOREIGN KEY (idstate) REFERENCES state(idstate),
     FOREIGN KEY (iduser) REFERENCES "user"(iduser)
 );

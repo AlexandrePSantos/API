@@ -28,7 +28,7 @@ exports.getById = async (req, res) => {
 
 // Create project
 exports.create = async (req, res) => {
-    const { nameproject, startdatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
+    const { nameproject, startdatep, enddatep, idstate, iduser } = req.body;
     try {
         const project = await prisma.project.create({
             data: {
@@ -37,9 +37,6 @@ exports.create = async (req, res) => {
                 enddatep: enddatep,
                 idstate: idstate,
                 iduser: iduser,
-                completionstatus: completionstatus,
-                performancereview: performancereview,
-                obs: obs
             },
         })
         res.status(201).json(project)
@@ -51,7 +48,7 @@ exports.create = async (req, res) => {
 // Update project
 exports.update = async (req, res) => {
     const id = req.params.idproject;
-    const { nameproject, startdatep, enddatep, idstate, iduser, completionstatus, performancereview, obs } = req.body;
+    const { nameproject, startdatep, enddatep, idstate, iduser } = req.body;
 
     try {
         const project = await prisma.project.update({
@@ -63,10 +60,7 @@ exports.update = async (req, res) => {
                 startdatep: startdatep,
                 enddatep: enddatep,
                 idstate: idstate,
-                iduser: iduser,
-                completionstatus: completionstatus,
-                performancereview: performancereview,
-                obs: obs
+                iduser: iduser
             },
         })
         res.status(200).json(project)
