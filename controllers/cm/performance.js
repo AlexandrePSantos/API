@@ -28,7 +28,7 @@ exports.getById = async (req, res) => {
 
 // Create user
 exports.create = async (req, res) => {
-    const { iduser, stars, review } = req.body;
+    const { iduser, idtask, stars, review } = req.body;
     try {
         const user = await prisma.performance.create({
             data: {
