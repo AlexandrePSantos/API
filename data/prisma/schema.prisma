@@ -77,3 +77,11 @@ model obs {
   idtask      Int
   content String   @db.Text
 }
+
+model performance {
+  idperformance  Int      @id @default(autoincrement())
+  iduser         Int
+  idtask         Int
+  stars          Int
+  review    String   @db.Text
+}

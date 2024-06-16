@@ -1,24 +1,15 @@
 const router = require('express').Router();
-const projectRouter = require('./project');
-const taskRouter = require('./task');   
-const userRouter = require('./user');
-const userTypeRouter = require('./userType');
-const authRouter = require('./auth');
-const statsRouter = require('./stats');
-const syncLogRouter = require('./syncLog');
-const obsRouter = require('./obs');
-const usertaskRouter = require('./usertask');
-const stateRouter = require('./state');
 
-router.use('/auth', authRouter);
-router.use('/project', projectRouter);
-router.use('/syncLog', syncLogRouter);
-router.use('/task', taskRouter);
-router.use('/user', userRouter);
-router.use('/userType', userTypeRouter);
-router.use('/stats', statsRouter);
-router.use('/obs', obsRouter);
-router.use('/usertask', usertaskRouter);
-router.use('/state', stateRouter);
+router.use('/auth', require('./auth'));
+router.use('/project', require('./project'));
+router.use('/syncLog', require('./syncLog'));
+router.use('/task', require('./task'));
+router.use('/user', require('./user'));
+router.use('/userType', require('./userType'));
+router.use('/stats', require('./stats'));
+router.use('/obs', require('./obs'));
+router.use('/usertask', require('./usertask'));
+router.use('/state', require('./state'));
+router.use('/performance', require('./performance'));
 
 module.exports = router;
